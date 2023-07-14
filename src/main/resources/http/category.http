@@ -1,0 +1,27 @@
+### create
+POST localhost:8080/category/create
+Content-Type: application/json
+
+{
+  "order_number": 4,
+  "name_uz": "Audio",
+  "name_ru": "АУДИО",
+  "name_en": "Radio"
+}
+
+### update
+PUT localhost:8080/category/3
+Content-Type: application/json
+
+{
+  "order_number": 3,
+  "name_uz": "Iqtisodiyot",
+  "name_ru": "ИҚТИСОДИЁТ",
+  "name_en": "Economy"
+}
+
+### delete
+DELETE localhost:8080/category/5
+
+### get all
+GET localhost:8080/category/all
