@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.Enum.Language;
 import com.example.dto.CategoryDTO;
 import com.example.dto.RegionDTO;
 import com.example.entity.CategoryEntity;
@@ -54,6 +55,32 @@ public class CategoryService {
         });
         return list;
     }
+
+
+
+    public List<CategoryDTO> getByLanguage(Language language){
+
+        List<CategoryDTO> list = new LinkedList<>();
+        categoryRepository.getAllByVisibleTrue().forEach(entity -> {
+            list.add(getByLanguageLogica(entity,language));
+        });
+        return list;
+    }
+
+    public CategoryDTO getByLanguageLogica(CategoryEntity entity, Language language){
+        CategoryDTO dto = new CategoryDTO();
+        dto.setId(entity.getId());
+        dto.setOrder_number(entity.getOrder_number());
+        switch (language){
+            case uz -> dto.setName(entity.getName_uz());
+            case en -> dto.setName(entity.getName_en());
+            case ru -> dto.setName(entity.getName_ru());
+            default -> dto.setName(entity.getName_uz());
+        }
+        return dto;
+    }
+
+
 
 
 

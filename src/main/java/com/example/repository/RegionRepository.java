@@ -1,6 +1,8 @@
 package com.example.repository;
 
+import com.example.dto.RegionDTO;
 import com.example.entity.RegionEntity;
+import com.example.mapper.RegionMapper;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -8,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,6 +28,10 @@ public interface RegionRepository extends CrudRepository<RegionEntity, Integer> 
     // TODO
     @Query("select r.name_uz from RegionEntity as r")
     Optional<RegionEntity> getByName_uz();
+
+
+    List<RegionEntity> findAllByVisibleTrue();
+
 
 
 

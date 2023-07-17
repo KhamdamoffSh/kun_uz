@@ -26,6 +26,5 @@ DELETE localhost:8080/region/12
 ### get all
 GET localhost:8080/region/all
 
-// TODO
 ### get by language uz
-GET localhost:8080/region/uz
+GET localhost:8080/region/lang

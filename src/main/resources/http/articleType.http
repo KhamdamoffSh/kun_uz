@@ -1,0 +1,31 @@
+### add
+POST localhost:8080/articleType/create
+Content-Type: application/json
+
+{
+  "order_number": 10,
+  "name_uz": "Yangilik",
+  "name_eng": "News",
+  "name_ru": "Новости"
+}
+
+### update
+PUT localhost:8080/articleType/12
+Content-Type: application/json
+
+{
+  "order_number": 12,
+  "name_uz": "asd",
+  "name_ru": "asdf",
+  "name_eng": "gag"
+}
+
+### delete
+DELETE localhost:8080/articleType/12
+
+### get all
+GET localhost:8080/articleType/all
+
+### get by language
+GET localhost:8080/articleType/lang
+

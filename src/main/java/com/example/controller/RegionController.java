@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.Enum.Language;
 import com.example.dto.RegionDTO;
 import com.example.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,10 @@ public class RegionController {
         return regionService.getAll();
     }
 
-    // TODO
-    @GetMapping("/uz")
-    public List<RegionDTO> getBylanguageUz() {
-        return regionService.getByLanguageUz();
+
+    @GetMapping("/lang")
+    public ResponseEntity<List<RegionDTO>> getBylang(@RequestParam(value = "lang",
+                                                     defaultValue = "ru")Language language) {
+        return ResponseEntity.ok(regionService.getByLanguage(language));
     }
 }

@@ -1,9 +1,9 @@
 package com.example.service;
 
+import com.example.Enum.Language;
 import com.example.dto.RegionDTO;
 import com.example.entity.RegionEntity;
 import com.example.exaption.ItemNotFoundException;
-import com.example.repository.ProfileRepository;
 import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
 @Service
@@ -61,15 +60,28 @@ public class RegionService {
     }
 
 
-    // TODO
-    public List<RegionDTO> getByLanguageUz(){
-        List<RegionDTO> list = new LinkedList<>();
-        Stream<Object> optional = regionRepository.getByName_uz()
-                .stream().map(i ->{
-                    return list.add(toDTO(i));
-        });
 
-        return list;
+
+    public List<RegionDTO> getByLanguage(Language lang){
+        List<RegionDTO> dtoList = new LinkedList<>();
+        regionRepository.findAllByVisibleTrue().forEach(entity -> {
+            dtoList.add(getByLangLogica(entity,lang));
+        });
+        return dtoList;
+    }
+
+
+    public RegionDTO getByLangLogica(RegionEntity entity, Language lang){
+        RegionDTO dto = new RegionDTO();
+        dto.setId(entity.getId());
+        dto.setOrder_number(entity.getOrder_number());
+        switch (lang){
+            case en -> dto.setName(entity.getName_en());
+            case uz -> dto.setName(entity.getName_uz());
+            case ru -> dto.setName(entity.getName_ru());
+            default -> dto.setName(entity.getName_uz());
+        }
+        return dto;
     }
 
 

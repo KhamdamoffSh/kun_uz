@@ -31,6 +31,7 @@ public class ProfileService {
     private CastomProfileRepository castomProfileRepository;
 
     public ProfileDTO add(ProfileDTO dto){
+        check(dto);
 
         ProfileEntity entity = new ProfileEntity();
         entity.setName(dto.getName());
@@ -39,10 +40,12 @@ public class ProfileService {
         entity.setPhone(dto.getPhone());
         entity.setPassword(dto.getPassword());
         entity.setStatus(ProfileStatus.ACTIVE);
-        entity.setRole(ProfileRole.USER);
+        entity.setRole(dto.getRole());
         entity.setCreated_date(LocalDateTime.now());
         profileRepository.save(entity);
         dto.setId(entity.getId());
+        dto.setStatus(entity.getStatus());
+        dto.setCreated_date(entity.getCreated_date());
         return dto;
     }
 
@@ -99,6 +102,15 @@ public class ProfileService {
         }
         if (profileDTO.getSurname() == null || profileDTO.getSurname().isBlank()) {
             throw new AppBadRequestException("Surname qani?");
+        }
+        if (profileDTO.getEmail() == null || profileDTO.getEmail().isBlank()) {
+            throw new AppBadRequestException("email qani?");
+        }
+        if (profileDTO.getPhone() == null || profileDTO.getPhone().isBlank()) {
+            throw new AppBadRequestException("phone qani?");
+        }
+        if (profileDTO.getPassword() == null || profileDTO.getPassword().isBlank() && profileDTO.getPassword().length() > 5) {
+            throw new AppBadRequestException("password qani?");
         }
     }
 

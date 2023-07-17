@@ -3,11 +3,12 @@ POST localhost:8080/profile/create
 Content-Type: application/json
 
 {
-  "name": "tursunxon",
-  "surname": "Tursunov",
-  "email": "tursun123@gmail.com",
-  "phone": "902345554",
-  "password": "tursun123"
+  "name": "Qoplonber",
+  "surname": "Ergashev",
+  "email": "qoplon1254@gmail.com",
+  "phone": "984563423",
+  "password": "qoplon1122",
+  "role": "MODERATOR"
 }
 
 ### update profile

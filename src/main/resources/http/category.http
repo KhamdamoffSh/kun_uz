@@ -25,3 +25,6 @@ DELETE localhost:8080/category/5
 
 ### get all
 GET localhost:8080/category/all
+
+### get by language
+GET localhost:8080/category/lang
