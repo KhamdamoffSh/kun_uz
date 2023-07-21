@@ -1,6 +1,7 @@
 ### create
-POST localhost:8080/category/create
+POST localhost:8080/api/v1/category/admin/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 {
   "order_number": 4,
@@ -10,21 +11,24 @@ Content-Type: application/json
 }
 
 ### update
-PUT localhost:8080/category/3
+PUT localhost:8080/api/v1/category/admin/5
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 {
-  "order_number": 3,
-  "name_uz": "Iqtisodiyot",
-  "name_ru": "ИҚТИСОДИЁТ",
-  "name_en": "Economy"
+  "order_number": 7,
+  "name_uz": "aadads",
+  "name_ru": "asdf",
+  "name_en": "asdf"
 }
 
 ### delete
-DELETE localhost:8080/category/5
+DELETE localhost:8080/api/v1/category/admin/5
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 ### get all
-GET localhost:8080/category/all
+GET localhost:8080/api/v1/category/admin/all
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 ### get by language
 GET localhost:8080/category/lang

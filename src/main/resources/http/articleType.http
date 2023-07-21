@@ -1,17 +1,19 @@
 ### add
-POST localhost:8080/articleType/create
+POST localhost:8080/api/v1/articleType/admin/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 {
-  "order_number": 10,
+  "order_number": 11,
   "name_uz": "Yangilik",
   "name_eng": "News",
   "name_ru": "Новости"
 }
 
 ### update
-PUT localhost:8080/articleType/12
+PUT localhost:8080/api/v1/articleType/admin/11
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 {
   "order_number": 12,
@@ -21,10 +23,12 @@ Content-Type: application/json
 }
 
 ### delete
-DELETE localhost:8080/articleType/12
+DELETE localhost:8080/api/v1/articleType/admin/11
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 ### get all
-GET localhost:8080/articleType/all
+GET localhost:8080/api/v1/articleType/admin/all
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 ### get by language
 GET localhost:8080/articleType/lang

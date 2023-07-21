@@ -1,8 +1,12 @@
 package com.example.controller;
 
 import com.example.Enum.Language;
+import com.example.Enum.ProfileRole;
+import com.example.dto.JwtDTO;
 import com.example.dto.RegionDTO;
 import com.example.service.RegionService;
+import com.example.util.SecurityUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,26 +15,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/region")
+@RequestMapping("/api/v1/region")
 public class RegionController {
 
     @Autowired
     private RegionService regionService;
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody RegionDTO dto){
+    @PostMapping(value = "/admin/create")
+    public ResponseEntity<?> create(@RequestBody RegionDTO dto,
+                                    HttpServletRequest request){
+        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         return new ResponseEntity<>(regionService.add(dto), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/admin/{id}")
     public ResponseEntity<?> updateById(@PathVariable("id") Integer id,
-                                        @RequestBody RegionDTO regionDTO){
-        Boolean b = regionService.updateById(id,regionDTO);
-        return ResponseEntity.ok(b);
+                                        @RequestBody RegionDTO regionDTO,
+                                        HttpServletRequest request){
+        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
+        return ResponseEntity.ok(regionService.updateById(id,regionDTO));
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") Integer id){
+    @DeleteMapping(value = "/admin/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable("id") Integer id,
+                                        HttpServletRequest request){
+        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         Boolean result = regionService.deleteById(id);
         if (result){
          return ResponseEntity.ok("Region deleted!!!");
@@ -38,8 +47,9 @@ public class RegionController {
         return ResponseEntity.badRequest().body("Region not faund");
     }
 
-    @GetMapping("/all")
-    public List<RegionDTO> all(){
+    @GetMapping("/admin/all")
+    public List<RegionDTO> all(HttpServletRequest request){
+        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         return regionService.getAll();
     }
 

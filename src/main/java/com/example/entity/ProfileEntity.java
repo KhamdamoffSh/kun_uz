@@ -34,9 +34,11 @@ public class ProfileEntity {
     private String password;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ProfileStatus status;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private ProfileRole role;
 
     @Column(name = "visible")
@@ -44,6 +46,9 @@ public class ProfileEntity {
 
     @Column(name = "created_date")
     private LocalDateTime created_date;
+
+    @Column(name = "prt_id")
+    private Integer prtId;
 
     @Column(name = "photo_id")
     private Integer photo_id;

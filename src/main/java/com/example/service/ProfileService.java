@@ -10,6 +10,8 @@ import com.example.exaption.AppBadRequestException;
 import com.example.exaption.ItemNotFoundException;
 import com.example.repository.CastomProfileRepository;
 import com.example.repository.ProfileRepository;
+import com.example.util.MD5Util;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -30,18 +32,18 @@ public class ProfileService {
     @Autowired
     private CastomProfileRepository castomProfileRepository;
 
-    public ProfileDTO add(ProfileDTO dto){
-        check(dto);
-
+    public ProfileDTO add(ProfileDTO dto, Integer prtId){
+        // check email phone
         ProfileEntity entity = new ProfileEntity();
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setEmail(dto.getEmail());
         entity.setPhone(dto.getPhone());
-        entity.setPassword(dto.getPassword());
+        entity.setPassword(MD5Util.encode(dto.getPassword()));
         entity.setStatus(ProfileStatus.ACTIVE);
         entity.setRole(dto.getRole());
         entity.setCreated_date(LocalDateTime.now());
+        entity.setPrtId(prtId);
         profileRepository.save(entity);
         dto.setId(entity.getId());
         dto.setStatus(entity.getStatus());
@@ -51,11 +53,16 @@ public class ProfileService {
 
 
     public Boolean updateById(Integer id, ProfileDTO dto){
-        check(dto);
-
+        isValidProfile(dto);
         int effectedRows = profileRepository.updatebyId(id, dto.getName(), dto.getSurname(), dto.getEmail(), dto.getPhone(), dto.getPassword());
             return effectedRows == 1;
         }
+
+    public Boolean updateDetail(Integer profileId, ProfileDTO dto) {
+        isValid(dto);
+        int effectedRows = profileRepository.updateDetail(profileId, dto.getName(), dto.getSurname());
+        return effectedRows == 1;
+    }
 
 
         public PageImpl<ProfileDTO> profilePagination(int page, int size){
@@ -130,4 +137,28 @@ public class ProfileService {
         return dto;
     }
 
+
+    void isValidProfile(ProfileDTO dto) {
+        if (dto.getName() == null || dto.getName().isBlank() || dto.getName().length() < 3) {
+            throw new AppBadRequestException("Name required");
+        }
+
+        if (dto.getSurname() == null || dto.getSurname().isBlank() || dto.getSurname().length() < 3) {
+            throw new AppBadRequestException("Surname required");
+        }
+
+        if (dto.getPhone() == null || dto.getName().isBlank() || dto.getPhone().length() != 9) {
+            throw new AppBadRequestException("Phone required");
+        }
+    }
+
+    void isValid(ProfileDTO dto){
+        if (dto.getName() == null || dto.getName().isBlank() || dto.getName().length() < 3) {
+            throw new AppBadRequestException("Name required");
+        }
+
+        if (dto.getSurname() == null || dto.getSurname().isBlank() || dto.getSurname().length() < 3) {
+            throw new AppBadRequestException("Surname required");
+        }
+    }
 }

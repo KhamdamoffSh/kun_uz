@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,9 +25,17 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
 
     Page<ProfileEntity> findAllByName(Pageable pageable,String name);
 
+    Optional<ProfileEntity> findByPhone(String phone);
+
 
     @Query("select s from ProfileEntity as s where s.id =:id")
     Optional<ProfileEntity> getById(Integer id);
 
 
+    Optional<ProfileEntity> findByEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("update ProfileEntity  set name =?2, surname =?3 where id =?1")
+    int updateDetail(Integer id, String name, String surname);
 }

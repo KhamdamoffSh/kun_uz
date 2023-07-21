@@ -1,0 +1,36 @@
+### create article
+POST localhost:8080/api/v1/article/moderator/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw
+
+{
+  "title": "Mirziyoyev",
+  "description": "Iqtisod",
+  "content": "Mirziyoyev Iroq shahriga jo'nab ketti"
+
+}
+
+### update
+PUT localhost:8080/api/v1/article/moderator/update/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw
+
+{
+  "title": "Ko'tbachcha",
+  "description": "Ko'ntucha",
+  "content": "Ko'tcha 2023",
+  "region_id": 1,
+  "category_id": 2
+}
+
+### delete
+DELETE localhost:8080/api/v1/article/moderator/delete/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw
+
+### change status
+PUT localhost:8080/api/v1/article/moderator/change/status/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw
+
+### get last 5 article
+GET localhost:8080/api/v1/article/moderator/getLastArticle
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw

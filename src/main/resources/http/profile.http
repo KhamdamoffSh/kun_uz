@@ -1,19 +1,21 @@
 ### create profile
-POST localhost:8080/profile/create
+POST localhost:8080/api/v1/profile/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk3ODQzMzgsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk4NzA3MzgsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.LBegraSCHqA3MeLpT7x2Aqmj4xPHLk3FS4dyGp7-JYeoV_W_7oQyX3TseZR5NiToa5a_Bul4bwbLxdhFts3y8g
 
 {
-  "name": "Qoplonber",
-  "surname": "Ergashev",
-  "email": "qoplon1254@gmail.com",
-  "phone": "984563423",
-  "password": "qoplon1122",
+  "name": "Alish",
+  "surname": "Alishev",
+  "email": "Alish123@gmail.com",
+  "phone": "901121147",
+  "password": "12345",
   "role": "MODERATOR"
 }
 
 ### update profile
-PUT localhost:8080/profile/5
+PUT localhost:8080/api/v1/profile/16
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk3ODQzMzgsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk4NzA3MzgsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.LBegraSCHqA3MeLpT7x2Aqmj4xPHLk3FS4dyGp7-JYeoV_W_7oQyX3TseZR5NiToa5a_Bul4bwbLxdhFts3y8g
 
 {
   "name": "Qo'yjon",
@@ -23,18 +25,32 @@ Content-Type: application/json
   "password": "sug'iluvchi123"
 }
 
+### udate detail
+PUT localhost:8080/api/v1/profile/detail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
+
+{
+  "name": "Adminjon",
+  "surname": "Adminov"
+}
+
 ### get pagination profile list
-GET localhost:8080/profile/pagination?page=2&size=2
+GET localhost:8080/api/v1/profile/pagination?page=2&size=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 
 ### delete profile
-DELETE localhost:8080/profile/2
+DELETE localhost:8080/api/v1/profile/19
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
+
 
 ### get all
-GET localhost:8080/profile/all
+GET localhost:8080/api/v1/profile/all
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NDkwNTcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODk5MzU0NTcsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.mV2HaHHJBa8yvqrn6bJnYorFsXn-rhMM1G6H3gd3aQQoiYfhk0WaK_gTKVC_P6RrTSEYgVYdnXnNfvN9STmO-w
 
 ### filter
-POST localhost:8080/profile/filter?page=1&size=10
+POST localhost:8080/api/v1/profile/filter?page=1&size=10
 Content-Type: application/json
 
 {
