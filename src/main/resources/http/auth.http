@@ -16,3 +16,16 @@ Content-Type: application/json
   "phone": "901121147",
   "password": "12345"
 }
+
+### Registration
+POST localhost:8080/api/v1/auth/registration
+Content-Type:  application/json
+
+{ "name": "Ali",
+  "surname": "Aliyev",
+  "email": "hamdamovshohjahon2007@mail.ru",
+  "password": "shohjahon2000"
+}
+
+### verification
+GET localhost:8080/api/v1/auth/verification/email/fadsfasdf

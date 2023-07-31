@@ -1,7 +1,10 @@
 package com.example.util;
 
 import com.example.Enum.ProfileRole;
+import com.example.dto.ArticleDTO;
+import com.example.dto.ArticleLikeDTO;
 import com.example.dto.JwtDTO;
+import com.example.entity.ArticleLikeEntity;
 import com.example.exaption.AppMethodNotAllowedException;
 import com.example.exaption.UnAuthorizedException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +18,7 @@ public class SecurityUtil {
         throw new UnAuthorizedException("Not authorized");
     }
 
-    public static JwtDTO hasRole(String authToken, ProfileRole... requiredRoles) {
+    public static JwtDTO hasRole(HttpServletRequest request, ArticleDTO article, String authToken, ProfileRole... requiredRoles) {
         JwtDTO jwtDTO = getJwtDTO(authToken);
         if (requiredRoles == null){
             return jwtDTO;

@@ -10,10 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "region")
-public class RegionEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class RegionEntity extends BaseEntity{
 
     @Column(name = "order_number")
     private Integer order_number;
@@ -27,9 +24,4 @@ public class RegionEntity {
     @Column(name = "name_en")
     private String name_en;
 
-    @Column(name = "visible")
-    private Boolean visible = Boolean.TRUE;
-
-    @Column(name = "created_date")
-    private LocalDateTime created_date;
 }

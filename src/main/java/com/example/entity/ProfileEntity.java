@@ -12,11 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "profile")
-public class ProfileEntity {
+public class ProfileEntity extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -27,25 +24,19 @@ public class ProfileEntity {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "phone", unique = true, nullable = false)
+    @Column(name = "phone", unique = true)
     private String phone;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "status")
+    @Column(name = "status",nullable = false)
     @Enumerated(EnumType.STRING)
     private ProfileStatus status;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private ProfileRole role;
-
-    @Column(name = "visible")
-    private Boolean visible = Boolean.TRUE;
-
-    @Column(name = "created_date")
-    private LocalDateTime created_date;
 
     @Column(name = "prt_id")
     private Integer prtId;

@@ -1,0 +1,20 @@
+### create email
+POST localhost:8080/api/v1/email/create
+Content-Type: application/json
+
+{
+  "email": "hamdamovshohjahon2007@mail.ru",
+  "message": "Kun.uz"
+}
+
+### get all
+GET localhost:8080/api/v1/email/getAll
+
+### get email by history
+GET localhost:8080/api/v1/email/get/email/history/hamdamovshohjahon2008@mail.ru
+
+### get by given date
+GET localhost:8080/api/v1/email/get/given/date/30-07-2023
+
+### pagination
+GET localhost:8080/api/v1/email/pagination?page=1&size=10

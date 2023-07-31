@@ -1,5 +1,5 @@
 package com.example.Enum;
 
 public enum ProfileStatus {
-    ACTIVE,NOTACTIVE
+    ACTIVE,NOTACTIVE,REGISTRATION
 }

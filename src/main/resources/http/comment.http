@@ -1,0 +1,31 @@
+### create comment
+POST localhost:8080/api/v1/comment/create
+Content-Type: application/json
+
+{
+  "content": "Manga bu sahifa juda yoqdi",
+  "article_id": 1
+
+}
+
+### update
+PUT localhost:8080/api/v1/comment/update/7
+Content-Type: application/json
+
+{
+  "content": "Bu mamnga umuman yoqmadi"
+}
+
+### delete
+DELETE localhost:8080/api/v1/comment/delete/8
+
+### pagination
+GET localhost:8080/api/v1/comment/pagination?page=1&size=10
+
+### filter
+POST localhost:8080/api/v1/comment/filter?page=1&size=10
+Content-Type: application/json
+
+{
+  "id": 5
+}

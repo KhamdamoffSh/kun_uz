@@ -1,12 +1,13 @@
 ### create article
 POST localhost:8080/api/v1/article/moderator/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2OTA1NDYwMzksImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY5MDYzMjQzOSwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.Of0z0Rtg-ji-Sq4HMUzF-f0HvDY-O3zVm6apGXWCXRE3_3rpwV3oYSs72qKvpeV9Xrwmb9t4TX-BRXAE2YsXkw
 
 {
-  "title": "Mirziyoyev",
+  "title": "Davlat",
   "description": "Iqtisod",
-  "content": "Mirziyoyev Iroq shahriga jo'nab ketti"
+  "content": "Prezidentimiz Iroqga jonab ketti",
+  "article_type_id": "1"
 
 }
 
@@ -34,3 +35,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwic
 ### get last 5 article
 GET localhost:8080/api/v1/article/moderator/getLastArticle
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODk4NTg0NDYsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4OTk0NDg0NiwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.kwymWJbxFhtKH6IKdyDv6A62ApWo7Eut0VnXFZhFORE34OWn2rXgJMrkBNiczhg2X9K8UX143FaKoiczIwtfTw
+
+
+### get 5 value
+GET localhost:8080/api/v1/article/moderator/getLastFiveArticle
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2OTAyOTM5MjAsImlkIjoyMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY5MDM4MDMyMCwiaXNzIjoiS3VuLnV6IHRlc3QgcG9ydGFsaSJ9.VkShszvlB6zvhUQviLGTvOYLWOYn_E8OCXePB1taWXi5KC0ahw4vYGyc1l-FIaAOXwNLv8uOLunOvluE5utF7w

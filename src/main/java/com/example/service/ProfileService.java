@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.example.Enum.ProfileRole;
 import com.example.Enum.ProfileStatus;
 import com.example.dto.FilterResultDTO;
 import com.example.dto.ProfileDTO;
@@ -11,12 +10,9 @@ import com.example.exaption.ItemNotFoundException;
 import com.example.repository.CastomProfileRepository;
 import com.example.repository.ProfileRepository;
 import com.example.util.MD5Util;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-
-
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;

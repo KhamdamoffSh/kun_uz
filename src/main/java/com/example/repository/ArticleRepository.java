@@ -1,8 +1,8 @@
 package com.example.repository;
 
 import com.example.Enum.ArticleStatus;
-import com.example.dto.ArticleDTO;
 import com.example.entity.ArticleEntity;
+import com.example.entity.ArticleTypeEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ArticleRepository extends CrudRepository<ArticleEntity, Integer> {
+public interface ArticleRepository extends CrudRepository<ArticleEntity, String> {
 
     @Transactional
     @Modifying
@@ -31,11 +31,37 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, Integer
     int changeStatusbyId(@Param("id") Integer id, @Param("status") ArticleStatus status);
 
 
-    @Query("from ArticleEntity order by created_date desc limit 5")
-    List<ArticleEntity>getLastFiveArticle();
+    @Query("from ArticleEntity as a " +
+            "inner join a.articleTypeSet as at" +
+            " where at.articleTypeId =:articleTypeId" +
+            " and a.status =PUBLISHED" +
+            " and a.visible = true order by a.publish_date desc limit :limit")
+    List<ArticleEntity>getLastFiveArticle(@Param("articleTypeId")Integer articleTypeId,
+                                          @Param("limit")int limit);
+
+
+    @Query("from ArticleEntity as a " +
+            "inner join a.articleTypeSet as at" +
+            " where at.articleTypeId =:articleTypeId" +
+            " and a.status =PUBLISHED" +
+            " and a.visible = true order by a.publish_date desc limit :limit")
+    List<ArticleEntity>getLastThreeArticle(@Param("articleTypeId")Integer articleTypeId,
+                                          @Param("limit")int limit);
+
+
+    @Query("from ArticleEntity  as a " +
+            "inner join a.articleTypeSet as at" +
+            " where at.articleTypeId =:articleTypeId" +
+            " and a.id <>:articleId" +
+            " and a.status =:status and a.visible = true order by a.publish_date desc limit 4")
+    List<ArticleEntity> getLast4ArticleTypeIdAndExcept(@Param("articleId")String articleId,
+                                                       @Param("articleTypeId") Integer articleTypeId,
+                                                       @Param("status") ArticleStatus status);
 
 
 
+    @Query("select a.name_uz from ArticleTypeEntity as a where a.id=:id")
+    ArticleTypeEntity getArticleType(List<Integer> id);
 
 
 
