@@ -53,10 +53,9 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
             "inner join a.articleTypeSet as at" +
             " where at.articleTypeId =:articleTypeId" +
             " and a.id <>:articleId" +
-            " and a.status =:status and a.visible = true order by a.publish_date desc limit 4")
+            " and a.status ='PUBLISHED' and a.visible = true order by a.publish_date desc limit 4")
     List<ArticleEntity> getLast4ArticleTypeIdAndExcept(@Param("articleId")String articleId,
-                                                       @Param("articleTypeId") Integer articleTypeId,
-                                                       @Param("status") ArticleStatus status);
+                                                       @Param("articleTypeId") Integer articleTypeId);
 
 
 
@@ -65,11 +64,8 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
 
 
 
-
-
-
-
-
+    @Query("from ArticleEntity as a where a.id !=:id")
+    List<ArticleEntity> notGivenId(@Param("id") String id);
 
 
 

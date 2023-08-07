@@ -17,4 +17,5 @@ GET localhost:8080/api/v1/email/get/email/history/hamdamovshohjahon2008@mail.ru
 GET localhost:8080/api/v1/email/get/given/date/30-07-2023
 
 ### pagination
-GET localhost:8080/api/v1/email/pagination?page=1&size=10
+GET localhost:8080/api/v1/email/admin/pagination?page=1&size=10
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2OTA4MTIxMzYsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2OTA4OTg1MzYsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.Mco6d-yKBTA49Og8C_GqgTjykKyGlx1Rl2pVEHf5eut7E_VREWp-L8kD6jm2qH7shyF7xVmVQKlxgWy9DK9RuQ

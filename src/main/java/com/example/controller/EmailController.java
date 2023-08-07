@@ -7,28 +7,27 @@ import com.example.dto.JwtDTO;
 import com.example.service.EmailService;
 import com.example.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("api/v1/email")
+@RequestMapping("/api/v1/email")
 public class EmailController {
 
     @Autowired
     private EmailService emailService;
 
-    @PostMapping(value = {"/create"})
-    ResponseEntity<ApiResponseDTO> create(@RequestBody EmailDTO dto){
-        return ResponseEntity.ok(emailService.create(dto));
-    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/get/email/history/{email}")
-    public ResponseEntity<List<EmailDTO>> getByEmailHistory(@PathVariable("email") String email){
+    public ResponseEntity<List<EmailDTO>> getByEmailHistory(@Valid  @PathVariable("email") String email){
         return ResponseEntity.ok(emailService.getByEmailHistory(email));
     }
 
@@ -44,9 +43,11 @@ public class EmailController {
     }*/
 
 
-    @GetMapping(value = "/pagination")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/admin/pagination")
     public ResponseEntity<PageImpl<EmailDTO>> pagination(@RequestParam(value = "page",defaultValue = "1")int page,
-                                                         @RequestParam(value = "size",defaultValue = "10")int size){
+                                                         @RequestParam(value = "size",defaultValue = "10")int size,
+                                                         HttpServletRequest request){
         PageImpl<EmailDTO> pagination = emailService.emailPagination(page-1,size);
         return ResponseEntity.ok(pagination);
     }

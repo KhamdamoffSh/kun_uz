@@ -5,7 +5,9 @@ import com.example.dto.AuthDTO;
 import com.example.dto.RegistrationDTO;
 import com.example.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +19,12 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping(value = {"/login"})
-    public ResponseEntity<ApiResponseDTO> login(@RequestBody AuthDTO dto) {
+    public ResponseEntity<ApiResponseDTO> login(@Valid @RequestBody AuthDTO dto) {
         return ResponseEntity.ok(authService.login(dto));
     }
 
     @PostMapping(value = {"/registration"})
-    public ResponseEntity<ApiResponseDTO> registration(@RequestBody RegistrationDTO dto,
+    public ResponseEntity<ApiResponseDTO> registration(@Valid @RequestBody RegistrationDTO dto,
                                                        HttpServletRequest request) {
         return ResponseEntity.ok(authService.registration(dto));
     }

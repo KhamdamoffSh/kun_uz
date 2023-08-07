@@ -7,9 +7,11 @@ import com.example.dto.JwtDTO;
 import com.example.service.ArticleTypeService;
 import com.example.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,25 +22,25 @@ public class ArticleTypeController {
     @Autowired
     private ArticleTypeService articleTypeService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin/create")
-    public ResponseEntity<?> create(@RequestBody ArticleTypeDTO dto,
+    public ResponseEntity<?> create(@Valid @RequestBody ArticleTypeDTO dto,
                                     HttpServletRequest request){
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         return new ResponseEntity<>(articleTypeService.add(dto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
-    public ResponseEntity<?> updateById(@PathVariable("id") Integer id,
+    public ResponseEntity<?> updateById(@Valid @PathVariable("id") Integer id,
                                         @RequestBody ArticleTypeDTO dto,
                                         HttpServletRequest request){
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         return ResponseEntity.ok(articleTypeService.updateById(id,dto));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/admin/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id,
                                         HttpServletRequest request) {
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         Boolean result = articleTypeService.deleteById(id);
         if (result) {
             return ResponseEntity.ok("ArticleType deleted!!!");
@@ -46,9 +48,9 @@ public class ArticleTypeController {
         return ResponseEntity.badRequest().body("ArticleType not faund");
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/all")
     public List<ArticleTypeDTO> getAll(HttpServletRequest request){
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         return articleTypeService.getAll();
     }
 

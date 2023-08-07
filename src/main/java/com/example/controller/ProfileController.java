@@ -6,9 +6,11 @@ import com.example.service.AuthService;
 import com.example.service.ProfileService;
 import com.example.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,21 +24,24 @@ public class ProfileController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody ProfileDTO dto, HttpServletRequest request) {
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping(value = "/admin/create")
+    public ResponseEntity<?> create(@Valid  @RequestBody ProfileDTO dto, HttpServletRequest request) {
+        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ROLE_ADMIN);
         return ResponseEntity.ok(profileService.add(dto, jwtDTO.getId()));
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateById(@PathVariable("id") Integer id,
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping(value = "/admin/{id}")
+    public ResponseEntity<?> updateById(@Valid @PathVariable("id") Integer id,
                                         @RequestBody ProfileDTO profileDTO,
                                         HttpServletRequest request) {
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
+        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ROLE_ADMIN);
         return ResponseEntity.ok(profileService.updateById(id,profileDTO));
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/detail")
     public ResponseEntity<Boolean> updateDetail(@RequestBody ProfileDTO dto,
                                                 HttpServletRequest request) {
@@ -45,20 +50,19 @@ public class ProfileController {
     }
 
 
-
-    @GetMapping(value = "/pagination")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/admin/pagination")
     public ResponseEntity<PageImpl<ProfileDTO>> paginationProfileList(@RequestParam(value = "page", defaultValue = "1") int page,
                                                                       @RequestParam(value = "size", defaultValue = "10") int size,
                                                                       HttpServletRequest request) {
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         PageImpl<ProfileDTO> paginationList = profileService.profilePagination(page - 1, size);
         return ResponseEntity.ok(paginationList);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping(value = "/admin/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id,
                                         HttpServletRequest request) {
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         Boolean result = profileService.deleteById(id);
         if (result) {
             return ResponseEntity.ok("Profile deleted!!!");
@@ -66,9 +70,9 @@ public class ProfileController {
         return ResponseEntity.badRequest().body("Profile not faund");
     }
 
-    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/all")
     public List<ProfileDTO> all(HttpServletRequest request) {
-        JwtDTO jwtDTO = SecurityUtil.hasRole(request, ProfileRole.ADMIN);
         return profileService.getAll();
     }
 

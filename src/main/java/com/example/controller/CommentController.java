@@ -5,6 +5,7 @@ import com.example.dto.*;
 import com.example.service.CommentService;
 import com.example.util.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
@@ -18,14 +19,14 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody CommentDTO dto,
+    public ResponseEntity<?> create(@Valid  @RequestBody CommentDTO dto,
                                     HttpServletRequest request){
         JwtDTO jwtDTO = SecurityUtil.hasRole(request, null);
         return new ResponseEntity<>(commentService.add(dto,jwtDTO.getId()), HttpStatus.OK);
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> updateById(@PathVariable("id") Integer id,
+    public ResponseEntity<?> updateById(@Valid @PathVariable("id") Integer id,
                                         @RequestBody CommentDTO dto){
         return ResponseEntity.ok(commentService.update(id,dto));
     }

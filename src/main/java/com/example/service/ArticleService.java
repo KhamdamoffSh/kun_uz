@@ -6,9 +6,11 @@ import com.example.entity.ArticleEntity;
 import com.example.entity.ArticleTypeEntity;
 import com.example.exaption.ItemNotFoundException;
 import com.example.repository.ArticleRepository;
+import org.aspectj.util.LangUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,8 @@ public class ArticleService {
     private RegionService regionService;
     @Autowired
     private ArticleTypesService articleTypesService;
+    @Autowired
+    private CategoryService categoryService;
 
     public ArticleDTO add(ArticleDTO dto) {
 
@@ -78,6 +82,57 @@ public class ArticleService {
             list.add(toDTO(i));
         });
         return list;
+    }
+
+
+    public List<ArticleDTO> notGivenId(String id){
+        Iterable<ArticleEntity> iterable = articleRepository.notGivenId(id);
+        List<ArticleDTO> list = new LinkedList<>();
+        iterable.forEach(e ->{
+            list.add(toDTO(e));
+        });
+        return list;
+    }
+
+
+
+    public List<ArticleDTO> getByIdAndLang(Integer articleId, LangUtil lang){
+        Optional<ArticleEntity> optional = articleRepository.getById(articleId);
+        if (optional.isEmpty()){
+            throw new ItemNotFoundException("Aticle not faund");
+        }
+        return Collections.singletonList(toDetailDTO(optional.get(), lang));
+    }
+
+
+    public List<ArticleDTO> getByLast4Article(String articleId,Integer articleTypeId){
+        List<ArticleDTO> list = new LinkedList<>();
+        Iterable<ArticleEntity> iterable = articleRepository.getLast4ArticleTypeIdAndExcept(articleId,articleTypeId);
+
+        for (ArticleEntity a : iterable){
+            list.add(toDTO(a));
+        }
+        return list;
+
+    }
+
+
+
+    public ArticleDTO toDetailDTO(ArticleEntity entity, LangUtil lang) {
+        ArticleDTO dto = toDTO(entity);
+
+        dto.setId(entity.getId());
+        dto.setContent(entity.getContent());
+        dto.setModerator_id(entity.getModerator_id());
+        dto.setPublished_date(entity.getPublish_date());
+        dto.setTitle(entity.getContent());
+        dto.setCategory_id(entity.getCategory_id());
+        dto.setRegion_id(entity.getRegion_id());
+        dto.setStatus(entity.getStatus());
+        dto.setShared_count(entity.getShared_count());
+        dto.setCreated_date(entity.getCreated_date());
+        dto.setDescription(entity.getDescription());
+        return dto;
     }
 
 
