@@ -4,10 +4,8 @@ import com.example.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +13,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +53,21 @@ public class SpringSecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private JwtTokenFilter jwtTokenFilter;
+
+    public static String[] AUTH_WHITELIST = {"/api/v1/auth/**",
+            "/api/v1/news/**",
+            "/api/v1/profile/**",
+            "/api/v1/articleLike/**",
+            "/api/v1/articleType/**",
+            "api/v1/articleSaved**",
+            "/api/v1/category/**",
+            "/api/v1/attach/**",
+            "/api/v1/comment/**",
+            "/api/v1/commentLike/**",
+            "/api/v1/email/**",
+            "/api/v1/region/**"};
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -80,18 +96,7 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((c) ->
-                c.requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/news/**").permitAll()
-                        .requestMatchers("/api/v1/profile/**").permitAll()
-                        .requestMatchers("/api/v1/articleLike/**").permitAll()
-                        .requestMatchers("/api/v1/articleType/**").permitAll()
-                        .requestMatchers("api/v1/articleSaved**").permitAll()
-                        .requestMatchers("/api/v1/category/**").permitAll()
-                        .requestMatchers("/api/v1/attach/**").permitAll()
-                        .requestMatchers("/api/v1/comment/**").permitAll()
-                        .requestMatchers("/api/v1/commentLike/**").permitAll()
-                        .requestMatchers("/api/v1/email/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/region/**").permitAll()
+                c.requestMatchers(AUTH_WHITELIST).permitAll()
                         .requestMatchers("/api/v1/article/moderator/**").hasRole("MODERATOR")
                         .requestMatchers("/api/v1/articleType/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/category/admin/**").hasRole("ADMIN")
@@ -100,9 +105,19 @@ public class SpringSecurityConfig {
                         .requestMatchers("/api/v1/profile/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/region/admin", "/api/v1/region/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
-        ).httpBasic(Customizer.withDefaults());
+        ).addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
         return http.build();
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**");
+            }
+        };
     }
 }

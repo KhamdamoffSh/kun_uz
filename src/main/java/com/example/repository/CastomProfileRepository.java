@@ -93,7 +93,7 @@ public class CastomProfileRepository {
             params.put("article_id", filterDTO.getArticle_id());
         }
         if (filterDTO.getId() != null) {
-            stringBuilder.append(" s.id =:id");
+            stringBuilder.append(" and s.id =:id");
             params.put("id", filterDTO.getId());
         }
         if (filterDTO.getCreated_date_from() != null && filterDTO.getCreated_date_to() != null) {
@@ -108,7 +108,7 @@ public class CastomProfileRepository {
             params.put("created_date_to",LocalDateTime.of(filterDTO.getCreated_date_to(), LocalTime.MAX));
         }
 
-        StringBuilder selectBuilder = new StringBuilder("select s from CommentEntity as s where ");
+        StringBuilder selectBuilder = new StringBuilder("select s from CommentEntity as s where 1=1");
         selectBuilder.append(stringBuilder);
 
         StringBuilder countBuilder = new StringBuilder("select count(s) from CommentEntity as s where ");

@@ -13,8 +13,8 @@ POST localhost:8080/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "phone": "901121147",
-  "password": "12345"
+  "phone": "997634747",
+  "password": "isokhon07"
 }
 
 ### Registration
@@ -22,9 +22,9 @@ POST localhost:8080/api/v1/auth/registration
 Content-Type:  application/json
 
 {
-  "name": "Ali",
-  "surname": "Aliyev",
-  "email": "hamdamovshohjahon2007@mail.ru",
+  "name": "Shohjahon",
+  "surname": "Hamdamov",
+  "email": "hamdamovshohjahon2007@gmail.ru",
   "password": "shohjahon2000"
 }
 

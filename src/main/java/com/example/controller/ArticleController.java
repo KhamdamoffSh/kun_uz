@@ -83,4 +83,18 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.getByLast4Article(articleId,typeId));
     }
 
+
+    @PreAuthorize("hasRole('MODERATOR')")
+    @GetMapping("moderator/get4Most")
+    private ResponseEntity<?> get4Most(){
+        return ResponseEntity.ok(articleService.get4most());
+    }
+
+
+    @PreAuthorize("hasRole('MODERATOR')")
+    @GetMapping("moderator/getArticleTypeAndRegion/{articleType}/{regionId}")
+    private ResponseEntity<?> getArticleTypeAndRegion(@PathVariable("articleType")String articleType,
+                                                      @PathVariable("regionId") Integer regionId){
+        return ResponseEntity.ok(articleService.getArticleTypeAndRegion(articleType,regionId));
+    }
 }

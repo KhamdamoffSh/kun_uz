@@ -9,12 +9,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JwtDTO {
+    private String phone;
     private Integer id;
     private ProfileRole role;
     private ArticleEntity article;
 
     public JwtDTO(Integer id, ProfileRole role) {
         this.id = id;
+        this.role = role;
+    }
+
+    public JwtDTO(String phone, ProfileRole role) {
+        this.phone = phone;
         this.role = role;
     }
 

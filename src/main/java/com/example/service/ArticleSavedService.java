@@ -22,7 +22,7 @@ public class ArticleSavedService {
         ArticleSavedEntity entity = new ArticleSavedEntity();
         entity.setId(dto.getId());
         entity.setArticleId(dto.getArticleId());
-        entity.setProfile(dto.getProfileId());
+        entity.setProfileId(dto.getProfileId());
         articleSavedRepository.save(entity);
         dto.setId(entity.getId());
 
@@ -51,7 +51,7 @@ public class ArticleSavedService {
         ArticleSavedDTO dto = new ArticleSavedDTO();
         dto.setId(entity.getId());
         dto.setArticleId(entity.getArticleId());
-        dto.setProfileId(entity.getProfile());
+        dto.setProfileId(entity.getProfileId());
 
         return dto;
     }

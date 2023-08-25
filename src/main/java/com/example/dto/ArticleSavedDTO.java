@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 public class ArticleSavedDTO {
     private Integer id;
-    private ArticleEntity articleId;
-    private ProfileEntity profileId;
+    private String articleId;
+    private Integer profileId;
 }

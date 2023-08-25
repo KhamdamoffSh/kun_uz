@@ -1,0 +1,1 @@
+insert into book(title,description) values("hello coding", "coding tutorial series");

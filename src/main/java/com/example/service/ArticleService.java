@@ -117,6 +117,31 @@ public class ArticleService {
     }
 
 
+    public List<ArticleDTO> get4most(){
+        List<ArticleDTO> list = new LinkedList<>();
+        Iterable<ArticleEntity> iterable = articleRepository.findAll();
+        for (ArticleEntity article : iterable){
+            int i = article.getView_count();
+            if (article.getView_count() > i){
+                list.add(toDTO(article));
+            }
+        }
+        return list;
+    }
+
+
+    public List<ArticleDTO> getArticleTypeAndRegion(String articleType, Integer region){
+        List<ArticleDTO> list = new LinkedList<>();
+        Iterable<ArticleEntity> iterable = articleRepository.getByArticleTypeAndRegion(articleType,region);
+        iterable.forEach(e ->{
+            list.add(toDTO(e));
+        });
+        return list;
+    }
+
+
+
+
 
     public ArticleDTO toDetailDTO(ArticleEntity entity, LangUtil lang) {
         ArticleDTO dto = toDTO(entity);

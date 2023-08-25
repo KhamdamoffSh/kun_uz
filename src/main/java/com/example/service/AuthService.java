@@ -42,7 +42,7 @@ public class AuthService {
         response.setSurname(profileEntity.getSurname());
         response.setRole(profileEntity.getRole());
         response.setPhone(profileEntity.getPhone());
-        response.setJwt(JwtUtil.encode(profileEntity.getId(), profileEntity.getRole()));
+        response.setJwt(JwtUtil.encode(profileEntity.getPhone(), profileEntity.getRole()));
         return new ApiResponseDTO(true, response);
     }
 

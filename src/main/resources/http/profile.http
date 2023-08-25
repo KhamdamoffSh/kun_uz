@@ -1,14 +1,14 @@
 ### create profile
-POST localhost:8080/api/v1/profile/create
+POST localhost:7070/api/v1/profile/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2OTAzODE4ODQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2OTA0NjgyODQsImlzcyI6Ikt1bi51eiB0ZXN0IHBvcnRhbGkifQ.Av98682qj0B4U2lIIKRg5Yq0RgLvB-ldmFq-3GLhU1-L7NH3KHJRKBqm8KlIcVvvzBgpufZqT5AcQ_IRhrqI_w
 
 {
-  "name": "Mo'ydinjon",
-  "surname": "Qambarov",
-  "email": "Mo'ydin345@gmail.com",
-  "phone": "987676767",
-  "password": "12345",
+  "name": "Isoxon",
+  "surname": "Mamadaliyev",
+  "email": "Isocheek@gmail.com",
+  "phone": "997634747",
+  "password": "isakhon07",
   "role": "MODERATOR"
 }
 

@@ -30,6 +30,12 @@ public class ArticleEntity extends BaseStringEntity{
     @Column(name = "view_count")
     private Integer view_count = 0;
 
+    @Column(name = "likeCount")
+    private String likeCount;
+
+    @Column(name = "disLikeCount")
+    private String dislike;
+
     @Column(name = "image_id",nullable = false)
     private String image_id;
     @OneToOne(fetch = FetchType.LAZY)
